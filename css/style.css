@@ -16,3 +16,12 @@ td, th {
 table {
     border-radius: 3px;
 }
+.c-app-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.c-app-heading h1 {
+    text-shadow: 1px 1px rgba(255, 0, 0, 0.37);
+    border-bottom: 3px solid red;
+    display: inline-block;
+}
