@@ -28,6 +28,7 @@ $(document).ready( function() {
                 }
                 //console.log($('.c-data')[0].innerHTML);
                 $('.c-data').append(todoRow.join(''));
+                $('.table').show();
 
             }
         });
