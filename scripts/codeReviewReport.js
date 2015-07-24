@@ -15,12 +15,12 @@ $(document).ready( function() {
                     todoRow.push(
                             '<tr>' +
                                 '<td>' + fileName + '</td>' +
-                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
-                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
-                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
-                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
-                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
-                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/HDC/g) !== null ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/TODO/g) !== null ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/CMS/g) !== null ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/NMC/g) !== null ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/TCF/g) !== null ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/DCR/g) !== null ? results.match(/TODO/g).length : 0) + '</td>' +
                             '</tr>'
                     );
                     //console.log(results.substr(0, results.indexOf('TODO')).split("\n").length);
