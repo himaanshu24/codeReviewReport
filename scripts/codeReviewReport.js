@@ -1,7 +1,8 @@
 $(document).ready( function() {
 
     // Get the numbe of "TODO" in each file in a branch
-    var getNumberOfToDos = function(username, repoName, branchName, fileName) {
+    var getNumberOfToDos = function (username, repoName, branchName, fileName) {
+        var todoRow = [];
         $.ajax({
             url: 'https://raw.githubusercontent.com/' + username + '/' + repoName + '/' + branchName + '/' + fileName,
             head: 'Accept: application/api.github.VERSION.raw',
@@ -10,17 +11,30 @@ $(document).ready( function() {
 
                 if( results.match(/TODO/g) !== null) {
                     // console.log('================================');
-                    console.log(branchName, ' --- ',fileName, ' TTT ',results.match(/TODO/g));
+                   // console.log(branchName, ' --- ', fileName, ' TTT ', results.match(/TODO/g).length);
+                    todoRow.push(
+                            '<tr>' +
+                                '<td>' + fileName + '</td>' +
+                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
+                                '<td>' + (results.match(/TODO/g).length ? results.match(/TODO/g).length : 0) + '</td>' +
+                            '</tr>'
+                    );
                     //console.log(results.substr(0, results.indexOf('TODO')).split("\n").length);
                     // console.log('*********************************');
                 }
+                //console.log($('.c-data')[0].innerHTML);
+                $('.c-data').append(todoRow.join(''));
 
             }
         });
     };
 
     // Get all the files in a sprint
-    var getAllTheFileFormAllBranch = function(username, repoName, gitSha, branchName) {
+    var getAllTheFileFormAllBranch = function (username, repoName, gitSha, branchName) {
         var fileName;
         $.ajax({
             url: 'https://api.github.com/repos/'+username+'/'+repoName+'/git/trees/'+gitSha+'?recursive=1',
@@ -32,7 +46,7 @@ $(document).ready( function() {
                     if(currentValue.type === 'blob') {
                         if ((/(css|js|dust|scss|htm|html)/gi).test(currentValue.path.split('.').pop())) {
                             fileName = currentValue.path;
-                            // console.log('Files = > ',  currentValue.path, branchName);
+                             //console.log('Files = > ',  currentValue.path, branchName);
                             getNumberOfToDos(username, repoName, branchName, fileName);
                         }
 
@@ -110,7 +124,7 @@ $(document).ready( function() {
 
     var bindEventHandler = function() {
         var username = 'himanshuk-optimus';
-        var repoName = 'my-first-github';
+        var repoName = 'UI_Induction';
         $('.c-select-wrapper select').on('change', function() {
             var gitSha = $(this).find('option:selected').attr('data-sha');
             var branchName = $(this).val();
@@ -122,7 +136,7 @@ $(document).ready( function() {
 
     var getListOfFilesInGithubRepository = function() {
         var username = 'himanshuk-optimus';
-        var repoName = 'my-first-github';
+        var repoName = 'UI_Induction';
         getBranchsGithubRepository(username, repoName);
         bindEventHandler();
     };
