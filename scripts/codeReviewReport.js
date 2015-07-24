@@ -1,6 +1,5 @@
 $(document).ready( function() {
 
-
     // Get the numbe of "TODO" in each file in a branch
     var getNumberOfToDos = function(username, repoName, branchName, fileName) {
         $.ajax({
@@ -10,10 +9,10 @@ $(document).ready( function() {
             {
 
                 if( results.match(/TODO/g) !== null) {
-                    console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+                    // console.log('================================');
                     console.log(branchName, ' --- ',fileName, ' TTT ',results.match(/TODO/g));
                     //console.log(results.substr(0, results.indexOf('TODO')).split("\n").length);
-                    console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ');
+                    // console.log('*********************************');
                 }
 
             }
@@ -46,6 +45,9 @@ $(document).ready( function() {
 
 
     var getBranchsGithubRepository = function(username, repoName) {
+        var headBranch = [];
+        var tagBranch = [];
+        var pullBranch = [];
         $.ajax({
             url: 'https://api.github.com/repos/' + username + '/' + repoName + '/git/refs',
             dataType: 'jsonp',
@@ -60,16 +62,45 @@ $(document).ready( function() {
                 // console.log(results.data);
 
                 results.data.map( function(currentValue) {
+                    // console.log(currentValue.ref);
                     if (currentValue.ref.indexOf('refs/heads') > -1) {
-                        //console.log(currentValue);
                         gitSha = currentValue.object.sha;
-                        // console.log(currentValue.ref);
                         branchName  = currentValue.ref.split('/').pop();
-                        
-                        getAllTheFileFormAllBranch(username, repoName, gitSha, branchName);
-                        // getNumberOfToDos(username, repoName, branchName);
+                        headBranch.push([branchName,gitSha]);
+                    } else if (currentValue.ref.indexOf('refs/tags') > -1) {
+                        gitSha = currentValue.object.sha;
+                        branchName  = currentValue.ref.split('/').pop();
+                        tagBranch.push([branchName,gitSha]);
+                    } else if (currentValue.ref.indexOf('refs/pull') > -1) {
+                        gitSha = currentValue.object.sha;
+                        branchName  = currentValue.ref.split('/').pop();
+                        pullBranch.push([branchName,gitSha]);
                     }
                 });
+                // getAllTheFileFormAllBranch(username, repoName, gitSha, branchName);
+
+                // Seting the default options in selectbox.
+                var optionsHead = ['<option>--Select Branch--</option>'];
+                var optionsTag = ['<option>--Select Tag--</option>'];
+                var optionsPull = ['<option>--Select PR--</option>'];
+                // Creating the Branch selectbox options.
+                headBranch.map( function(currentValue, index) {
+                    optionsHead.push('<option data-sha="' + currentValue[1] + '">' + currentValue[0] + '</option>');
+                });
+                // Creating the Tag selectbox options.
+                tagBranch.map( function(currentValue, index) {
+                    optionsTag.push('<option data-sha="' + currentValue[1] + '">' + currentValue[0] + '</option>');
+                });
+                // Creating the branch selectbox options.
+                pullBranch.map( function(currentValue, index) {
+                    optionsPull.push('<option data-sha="' + currentValue[1] + '">' + currentValue[0] + '</option>');
+                });
+
+                // Populating the Branch, Tag and PR selectbox.
+                $('.c-gitSelect-head')[0].innerHTML = optionsHead.join('');
+                $('.c-gitSelect-tag')[0].innerHTML = optionsTag.join('');
+                $('.c-gitSelect-pull')[0].innerHTML = optionsPull.join('');
+
             }
         });
 
@@ -77,12 +108,23 @@ $(document).ready( function() {
 
     };
 
+    var bindEventHandler = function() {
+        var username = 'himanshuk-optimus';
+        var repoName = 'my-first-github';
+        $('.c-select-wrapper select').on('change', function() {
+            var gitSha = $(this).find('option:selected').attr('data-sha');
+            var branchName = $(this).val();
+            getAllTheFileFormAllBranch(username, repoName, gitSha, branchName);
+            // console.log($(this).val(), $(this).find('option:selected').attr('data-sha'));
+        });
+    };
 
 
     var getListOfFilesInGithubRepository = function() {
         var username = 'himanshuk-optimus';
-        var repoName = 'UI_Induction';
+        var repoName = 'my-first-github';
         getBranchsGithubRepository(username, repoName);
+        bindEventHandler();
     };
 
 

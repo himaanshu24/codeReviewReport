@@ -1,30 +1,26 @@
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <script src="scripts/jquery-1.11.3.min.js"></script>
+    <script src="scripts/codeReviewReport.js"></script>
 </head>
 <body>
-
-    <div class="c-get-github-detail">
-        Enter git repo: <input type="text" name="Enter username" class="c-git-repo" value="">
-        Enter repo branch: <input type="text" name="Enter username" value="">
+    <div class="c-gihub-api-wrapper">
+        <div class="c-get-github-detail">
+            <label for="#c-git-username">Enter git username:</label>
+            <input type="text" id="c-git-username"><br>
+            <label for="#c-git-repo-name">Enter Repository name:</label>
+            <input type="text" id="c-git-repo-name">
+        </div>
+        <button type="button" name="button" class="c-fetch-git-info">Get branches</button>
+        <p>Select the branch to fetch the number of todos in files</p>
+        <div class="c-select-wrapper">
+            <label>Git Head branch</label>
+            <select class="c-gitSelect-head" name=""></select>
+            <label>Git Tag</label>
+            <select class="c-gitSelect-tag" name=""></select>
+            <label>Git Pull</label>
+            <select class="c-gitSelect-pull" name=""></select>
+        </div>
     </div>
-
-    <select class="c-gitSelect" name=""></select>
-    <div class="c-git-table"></div>
-    <button type="button" name="button" class="c-fetch-git-info">Get the result</button>
-
-
-
-    <script src="https://app.netlify.com/authentication.js"></script>
-    <script>
-        netlify.authenticate({provider:"github"}, function(err, data) {
-            if (err) { return console.log("Error authenticating: %s", err.message); }
-            console.log("Authenticated with Github: %o", data);
-        })
-    </script>
-
-    <script src="scripts/codeReviewReport.js"></script>
-
 </body>
 </html>
