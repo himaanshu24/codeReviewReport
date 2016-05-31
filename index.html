@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="scripts/jquery-1.11.3.min.js"></script>
+        <script src="scripts/codeReviewReport.js"></script>
+    </head>
+    <body>
+        <div class="c-gihub-api-wrapper container">
+            <div class="row c-app-heading">
+                <h1>Gtihub Code Review Report</h1>
+            </div>
+            <div class="clearfix">
+                <div class="c-get-github-detail col-sm-4">
+                    <div class="form-group">
+                        <label for="c-git-username">Enter git username</label>
+                        <input type="text" class="form-control" id="c-git-username" placeholder="Git username">
+                    </div>
+                    <div class="form-group">
+                        <label for="c-git-repo-name">Enter Repository name</label>
+                        <input type="text" class="form-control" id="c-git-repo-name" placeholder="Repository name">
+                    </div>
+                    <button type="button" class="c-fetch-git-info btn btn-info">Get Branches</button>
+                </div>
+                <div class="col-sm-8">
+                    <h4>Select the branch to fetch the number of todos in files</h4>
+                    <div class="c-select-wrapper form-horizontal">
+                        <div class="form-group clearfix">
+                            <label class="col-xs-3">Git Head branch</label>
+                            <div class="col-xs-9">
+                                <select class="c-gitSelect-head form-control" name=""></select>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label class="col-xs-3">Git Tag</label>
+                            <div class="col-xs-9">
+                                <select class="c-gitSelect-tag form-control" name=""></select>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label class="col-xs-3">Git Pull</label>
+                            <div class="col-xs-9">
+                                <select class="c-gitSelect-pull form-control" name=""></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <table class="table table-bordered table-striped" style="display:none">
+                <thead>
+                    <tr>
+                        <td colspan="7" align="center"><h3>TODO List</h3></td>
+                    </tr>
+                    <tr>
+                        <th>File Name</th>
+                        <th>HDC</th>
+                        <th>MOA</th>
+                        <th>CMS</th>
+                        <th>NMC</th>
+                        <th>TCF</th>
+                        <th>DCR</th>
+                    </tr>
+                </thead>
+                <tbody class="c-data"></tbody>
+            </table>
+        </div>
+    </body>
+</html>

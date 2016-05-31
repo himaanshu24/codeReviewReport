@@ -1,0 +1,27 @@
+﻿body {
+    padding-top: 50px;
+}
+.container {
+    background: #f5f5f5;
+    border: 1px solid #BFBFBF;
+    padding: 15px;
+    border-radius: 3px;
+}
+.c-fetch-git-info {
+    width: 100%;
+}
+td, th {
+    text-align: center;
+}
+table {
+    border-radius: 3px;
+}
+.c-app-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.c-app-heading h1 {
+    text-shadow: 1px 1px rgba(255, 0, 0, 0.37);
+    border-bottom: 3px solid red;
+    display: inline-block;
+}
