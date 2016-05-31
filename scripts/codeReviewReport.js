@@ -1,16 +1,18 @@
 $(document).ready( function() {
 
+    // TODO: Remove this if done
     // Get the numbe of "TODO" in each file in a branch
     var getNumberOfToDos = function (username, repoName, branchName, fileName) {
         var todoRow = [];
         $('.c-data').empty();
         $('table').hide();
+        // SNSI: Wrong naming conventions
         $.ajax({
             url: 'https://raw.githubusercontent.com/' + username + '/' + repoName + '/' + branchName + '/' + fileName,
             head: 'Accept: application/api.github.VERSION.raw',
             success: function(results, xhr)
             {
-
+                // DNLI: Use service rather than null
                 if( results.match(/TODO/g) !== null) {
                     // console.log('================================');
                    // console.log(branchName, ' --- ', fileName, ' TTT ', results.match(/TODO/g).length);
